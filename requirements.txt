@@ -19,3 +19,6 @@ streamlit
 langchain-groq
 transformers
 pdfminer.six
+pypdf
+langchain-google-genai
+langchain-mistralai

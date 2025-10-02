@@ -5,9 +5,9 @@ sys.path.insert(0, str(project_root))
 
 
 
-from langchain_community.document_loaders import PDFMinerLoader
+from langchain_community.document_loaders import PyPDFLoader
 def data_loader(file_path):
-    loader = PDFMinerLoader(file_path)
+    loader = PyPDFLoader(file_path)
     docs = loader.load()
     return(docs)
 
