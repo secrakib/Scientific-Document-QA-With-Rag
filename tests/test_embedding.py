@@ -4,10 +4,10 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from backend.embeddings.embedding import embedding
+from backend.embeddings.embedding import gemini_embedding
 from backend.ingestion.pdf_loader import data_loader
 from backend.splitting.text_splitter import text_splitter
-embedding=embedding()
+embedding=gemini_embedding()
 
 
 

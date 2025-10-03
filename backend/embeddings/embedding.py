@@ -3,20 +3,30 @@ import sys,os,types
 from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
-
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 load_dotenv()
 
 os.environ["MISTRALAI_API_KEY"] = os.getenv("MISTRALAI_API_KEY")
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACEHUB_API_TOKEN")
-
+os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
 
 from langchain_mistralai import MistralAIEmbeddings
-def embedding():
+def mistral_embedding():
     embeddings = MistralAIEmbeddings(
         model="mistral-embed",
         api_key=os.environ["MISTRALAI_API_KEY"]
     )
     return embeddings
 
+
+def gemini_embedding():
+    embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001"
+    
+    )
+    return embeddings
+
+
+print(gemini_embedding)
 

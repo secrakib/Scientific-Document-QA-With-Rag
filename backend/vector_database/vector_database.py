@@ -5,11 +5,22 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from langchain_community.vectorstores import Chroma
-from backend.embeddings.embedding import embedding
+from langchain_community.vectorstores import FAISS
 
-def vector_database(docs,embedding):
+def chroma_vector_database(docs,embedding):
     vectorstore = Chroma.from_documents(
         documents=docs,
         embedding=embedding
     )
     return vectorstore
+
+def faiss_vector_database(docs,embedding):
+    vectorstore = FAISS.from_documents(
+        documents=docs,
+        embedding=embedding
+    )
+    return vectorstore
+
+
+
+
