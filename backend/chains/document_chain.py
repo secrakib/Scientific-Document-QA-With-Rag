@@ -9,11 +9,12 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 
 def document_chain(llm):
     qa_prompt = ChatPromptTemplate.from_messages([
-        ("system", "Answer the user's questions based on the below context:\n\n{context}"),
+        ("system", "Answer the user's questions based on the provided context:{context} and previous conversation history."),
         MessagesPlaceholder(variable_name="chat_history"),
         ("user", "{input}")
     ])
 
+    
     stuff_documents_chain = create_stuff_documents_chain(llm, qa_prompt)
 
     return stuff_documents_chain
