@@ -6,6 +6,6 @@ sys.path.insert(0, str(project_root))
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 def text_splitter(docs):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500,chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=2200,chunk_overlap=300)
     splitted_text = text_splitter.split_documents(docs)
     return splitted_text

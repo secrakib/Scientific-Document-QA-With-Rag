@@ -15,7 +15,6 @@ wikipedia
 pypdf
 unstructured
 tiktoken
-streamlit
 langchain-groq
 transformers
 pdfminer.six

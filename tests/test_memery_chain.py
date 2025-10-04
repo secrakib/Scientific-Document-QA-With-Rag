@@ -16,7 +16,7 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from backend.chains.memory_chain import memory_chain,get_session_history
 from langchain_core.documents import Document
 
-path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
+path = 'backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf'
 loaded_docs = data_loader(path)
 
 # Split documents
