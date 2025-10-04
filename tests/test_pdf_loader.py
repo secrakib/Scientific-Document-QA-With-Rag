@@ -6,3 +6,4 @@ sys.path.insert(0, str(project_root))
 from backend.ingestion.pdf_loader import data_loader
 x=data_loader('backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf')
 print(x)
+#hello
