@@ -21,11 +21,7 @@ loaded_docs = data_loader(path)
 
 # Split documents
 splitted_docs = text_splitter(loaded_docs)
-'''# Create test documents
-splitted_docs = [
-    Document(page_content="The capital of France is Paris."),
-    Document(page_content="The population of Paris is about 2.2 million.")
-]'''
+
 # Create vector database
 embedding = gemini_embedding()
 vector_database = faiss_vector_database(splitted_docs, embedding)
@@ -58,24 +54,30 @@ response2 = memory_chain.invoke(
     config={"configurable": {"session_id": session_id}}
 )
 print("\nQ2:", response2["answer"])
+
+response3 = memory_chain.invoke(
+    {"input": "Who among mentioned the authors doesnot have afficiation with bangladeshi university?"},
+    config={"configurable": {"session_id": session_id}}
+)
+print("\nQ3:", response3["answer"])
+
+response4 = memory_chain.invoke(
+    {"input": "Is he a male or female and what's his name?"},
+    config={"configurable": {"session_id": session_id}}
+)
+print("\nQ4:", response4["answer"])
+
 print()
 print()
-print(response2)
+
 history = get_session_history(session_id)
 print("\n \n")
 print("\nChat History Messages:", len(history.messages))
 print(history.messages)
+print("\n \n")
+print("\n \n")
+print(history)
 
 
-'''chat_history = ChatMessageHistory()
-chat_history.add_user_message("Sylhet is famous for Tea.")
-chat_history.add_ai_message("Ok.Thank you for the knowledge.")
 
-response= retrieval_chain_instance.invoke({
-    "input": "Why Sylhet is famous for?",
-    "chat_history": chat_history.messages
-})
-
-print(response['answer'])
-print(response)'''
 
