@@ -8,19 +8,19 @@ from typing import Optional
 import sys
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from backend.llm.llm import llm
-from backend.embeddings.embedding import gemini_embedding
-from backend.vector_database.vector_database import faiss_vector_database
-from backend.splitting.text_splitter import text_splitter
-from backend.ingestion.pdf_loader import data_loader
-from backend.retriver.retriver import retriver
-from backend.chains.document_chain import document_chain
-from backend.chains.retrival_chain import retrival_chain
-from backend.retriver.history_aware_retriver import history_retriver
-from backend.chains.memory_chain import memory_chain, get_session_history
+from llm.llm import llm
+from embeddings.embedding import gemini_embedding
+from vector_database.vector_database import faiss_vector_database
+from splitting.text_splitter import text_splitter
+from ingestion.pdf_loader import data_loader
+from retriver.retriver import retriver
+from chains.document_chain import document_chain
+from chains.retrival_chain import retrival_chain
+from retriver.history_aware_retriver import history_retriver
+from chains.memory_chain import memory_chain, get_session_history
 
 app = FastAPI(title="RAG PDF Query API")
 

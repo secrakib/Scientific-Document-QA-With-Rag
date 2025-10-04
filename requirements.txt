@@ -26,3 +26,5 @@ langchain-chroma
 faiss-cpu
 fastapi
 python-multipart
+uvicorn
+python-dotenv
