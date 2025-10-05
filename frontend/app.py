@@ -12,6 +12,8 @@ import os
 # API Configuration
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 
+API_URL = API_URL.rstrip('/')
+
 st.set_page_config(
     page_title="PDF Q&A Assistant",
     page_icon="📄",
