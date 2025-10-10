@@ -1,4 +1,4 @@
-import sys
+import sys,os
 from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
@@ -9,6 +9,10 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 import json
 
+from dotenv import load_dotenv
+load_dotenv()
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+
 
 class PaperMetadata(BaseModel):
     """Structured output model for research paper metadata."""
@@ -18,7 +22,7 @@ class PaperMetadata(BaseModel):
     keywords: str = Field(default="", description="Keywords or index terms (comma-separated)")
 
 
-def metadata_extraction(document: List, google_api_key: str, model: str = "gemini-2.5-pro") -> List:
+def metadata_ingested_docs(document: List, model: str = "gemini-2.5-pro") -> List:
     """
     Extract metadata from the first document and apply it to all documents.
     
@@ -53,7 +57,7 @@ def metadata_extraction(document: List, google_api_key: str, model: str = "gemin
     # Initialize LLM with structured output
     llm = ChatGoogleGenerativeAI(
         model=model,
-        google_api_key=google_api_key,
+        google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0
     )
     

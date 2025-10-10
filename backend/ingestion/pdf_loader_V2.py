@@ -1,7 +1,10 @@
-import sys
+import sys,os
 from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
+from dotenv import load_dotenv
+load_dotenv()
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_pymupdf4llm import PyMuPDF4LLMLoader
@@ -9,7 +12,6 @@ from langchain_community.document_loaders.parsers import LLMImageBlobParser
 
 def data_loader(
     path: str,
-    api_key: str,
     model: str = "gemini-2.5-flash-lite",
     extract_images: bool = False,
     max_output_tokens: int = 300,
@@ -19,8 +21,7 @@ def data_loader(
     Load PDF documents with optional image extraction.
     
     Args:
-        path: Path to the PDF file
-        api_key: Google API key
+        file_path: Path to the PDF file
         model: Model name for Gemini
         extract_images: Whether to extract and parse images
         max_output_tokens: Maximum output tokens for the model
@@ -38,7 +39,7 @@ def data_loader(
     if extract_images:
         gemini_flash = ChatGoogleGenerativeAI(
             model=model,
-            google_api_key=api_key,
+            google_api_key= os.getenv("GOOGLE_API_KEY"),
             max_output_tokens=max_output_tokens,
             temperature=temperature
         )
