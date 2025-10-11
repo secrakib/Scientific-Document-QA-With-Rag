@@ -121,6 +121,6 @@ def metadata_ingested_docs(document: List, model: str = "gemini-2.5-pro") -> Lis
     
     print(" Metadata successfully applied to all documents!")
     
-    return doc
+    return document
 
 

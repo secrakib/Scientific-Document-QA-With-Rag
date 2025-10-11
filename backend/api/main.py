@@ -15,7 +15,8 @@ from llm.llm import llm
 from embeddings.embedding import gemini_embedding
 from vector_database.vector_database import faiss_vector_database
 from splitting.text_splitter import text_splitter
-from ingestion.pdf_loader import data_loader
+from ingestion.pdf_loader_V2 import data_loader
+from ingestion.meta_data_ingestion import metadata_ingested_docs
 from retriver.retriver import retriver
 from chains.document_chain import document_chain
 from chains.retrival_chain import retrival_chain
@@ -72,8 +73,9 @@ async def upload_pdf(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
         
         # Process PDF
-        loaded_docs = data_loader(str(file_path))
-        splitted_docs = text_splitter(loaded_docs)
+        loaded_docs = data_loader(str(file_path),extract_images=True)
+        docs_with_metadata=metadata_ingested_docs(loaded_docs,'gemini-2.5-flash-lite')
+        splitted_docs = text_splitter(docs_with_metadata)
         
         # Create vector database
         embedding = gemini_embedding()

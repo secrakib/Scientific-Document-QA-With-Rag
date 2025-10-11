@@ -38,7 +38,7 @@ chat_history.add_user_message("Sylhet is famous for Tea.")
 chat_history.add_ai_message("Ok.Thank you for the knowledge.")
 
 response= retrieval_chain_instance.invoke({
-    "input": "Why Sylhet is famous for? Use previous chats if you need to.",
+    "input": "Why Sylhet is famous for?",
     "chat_history": chat_history.messages
 })
 

@@ -20,7 +20,7 @@ vector_database=vector_database(splitted_docs,embedding)
 
 retriver=retriver(vector_database)
 
-query = "What ML models are used in the research?"
+query = "What  ML models are used in the research?"
 response = retriver.invoke(query)
 
 print(response)

@@ -6,5 +6,5 @@ sys.path.insert(0, str(project_root))
 
 
 def retriver(vector_database):
-    retriever = vector_database.as_retriever(search_kwargs={"k": 3})
+    retriever = vector_database.as_retriever(search_kwargs={"k": 10})
     return retriever

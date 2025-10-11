@@ -7,7 +7,8 @@ from backend.llm.llm import llm
 from backend.embeddings.embedding import gemini_embedding
 from backend.vector_database.vector_database import faiss_vector_database
 from backend.splitting.text_splitter import text_splitter
-from backend.ingestion.pdf_loader import data_loader
+from backend.ingestion.pdf_loader_V2 import data_loader
+from backend.ingestion.meta_data_ingestion import metadata_ingested_docs
 from backend.retriver.retriver import retriver
 from backend.chains.document_chain import document_chain
 from backend.chains.retrival_chain import retrival_chain
@@ -16,11 +17,12 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from backend.chains.memory_chain import memory_chain,get_session_history
 from langchain_core.documents import Document
 
-path = 'backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf'
-loaded_docs = data_loader(path)
+path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
+loaded_docs = data_loader(path='backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf')
+metadata = metadata_ingested_docs(loaded_docs,"gemini-2.5-flash-lite")
 
 # Split documents
-splitted_docs = text_splitter(loaded_docs)
+splitted_docs = text_splitter(metadata)
 
 # Create vector database
 embedding = gemini_embedding()

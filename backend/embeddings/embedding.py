@@ -22,11 +22,12 @@ def mistral_embedding():
 
 def gemini_embedding():
     embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-001"
+    model="models/gemini-embedding-001",
+    
     
     )
     return embeddings
 
 
-print(gemini_embedding)
+
 

@@ -29,3 +29,4 @@ python-multipart
 uvicorn
 python-dotenv
 langchain-pymupdf4llm
+pillow
