@@ -1,7 +1,10 @@
 # 🔬 Context-Aware Scientific Document Q/A System  
 *A Retrieval-Augmented Generation (RAG) system for interactive scientific document exploration.*
 
-![Demo](https://your-demo-gif-or-screenshot-link) <!-- Optional: Add a preview GIF or screenshot -->
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://paperchat-frontend.onrender.com/)
+
+
+<!-- Optional: Add a preview GIF or screenshot -->
 
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/)
@@ -75,48 +78,93 @@ By combining **RAG techniques, Gemini embeddings, and FAISS semantic search**, t
 
 ## 🧑‍💻 Setup & Installation
 
-### 1. Clone the Repository
-```bash
+### Clone and Run the Project
+```
+Clone the repo
+
 git clone https://github.com/yourusername/context-aware-scientific-qa.git
 cd context-aware-scientific-qa
 
-2. Create a Virtual Environment
+Create a Virtual Environment
+
 python -m venv venv
 source venv/bin/activate     # On macOS/Linux
 venv\Scripts\activate        # On Windows
 
-3. Install Dependencies
+Install Dependencies
 pip install -r requirements.txt
 
 4. Run the Streamlit App
 streamlit run app.py
 ```
 
+### 🔧 Environment Variables
+This project requires a .env file in the root directory to store environment-specific configuration values.
+Create a file named .env in the project root with the following content:
+```
+# .env
+GOOGLE_API_KEY=your_google_api_key_here
+```
 
-📚 Example Query
+### 📚 Example Query
 ```
 User: “What is the main contribution of this paper?”
 System: “The paper proposes a context-aware retrieval model for improved document-level question answering, leveraging multi-hop reasoning across sections.”
 ```
 
-🧱 Project Structure
+### 🧱 Project Structure
 ```
-📂 context-aware-scientific-qa
-├── app.py                  # Streamlit UI
-├── backend/
-│   ├── api.py              # FastAPI endpoints
-│   ├── rag_pipeline.py     # LangChain pipeline
-│   ├── retriever.py        # FAISS + Gemini retrieval
-│   ├── memory.py           # Conversation memory handler
-│   └── utils.py
-├── tests/
-│   ├── test_pipeline.py
-│   └── test_retriever.py
-├── requirements.txt
-└── README.md
-```
+├─ .vscode/
+│
+├─ backend/
+│  ├─ api/
+│  │  ├─ uploads/
+│  │  ├─ main.py
+│  │  └─ __init__.py
+│  │
+│  ├─ chains/
+│  ├─ embeddings/
+│  ├─ ingestion/
+│  ├─ llm/
+│  ├─ retriever/
+│  ├─ splitting/
+│  ├─ vector_database/
+│  ├─ Dockerfile
+│  ├─ __init__.py
+│  └─ requirements.txt
+│
+├─ frontend/
+│  ├─ Dockerfile
+│  ├─ __init__.py
+│  ├─ app.py
+│  └─ requirements.txt
+│
+├─ tests/
+│
+├─ uploads/
+│
+├─ .gitignore
+├─ LICENSE
+├─ README.md
+├─ __init__.py
+├─ docker-compose.yml
+└─ requirements.txt
 
-📈 Future Improvements
+```
+### ⚠️ Known Issues / Limitations
+```
+The system currently requires a Google API key to function; other API providers are not yet supported.
+
+The embedding process may be slow for very large documents.
+
+Frontend performance can degrade with large datasets.
+
+Docker setup assumes a Unix-like environment; Windows users may need additional configuration.
+
+Error handling and logging are minimal and should be improved for production use.
+
+```
+### 📈 Future Improvements
 ```
 🔄 Support for multi-document context
 
@@ -126,9 +174,9 @@ System: “The paper proposes a context-aware retrieval model for improved docum
 
 🌍 Support for multilingual scientific texts
 ```
+### 
 
-
-📄 License
+### 📄 License
 ```
 This project is licensed under the MIT License
 ```
