@@ -18,6 +18,14 @@ This project enables **natural language interaction with scientific PDFs**, allo
 By combining **RAG techniques, Gemini embeddings, and FAISS semantic search**, the system delivers accurate, contextually grounded answers while maintaining conversational memory across interactions.
 
 ---
+---
+### 💻 Application UI
+![Application UI](https://github.com/user-attachments/assets/8c85cc9b-5f8c-416e-a5ec-4cfadcba2134)
+
+
+
+
+---
 
 ## 🚀 Key Features
 
