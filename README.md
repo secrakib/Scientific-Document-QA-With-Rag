@@ -142,11 +142,13 @@ System: “The paper proposes a novel Multimodal dataset for bengali hate speech
 ## ⚠️ Known Issues / Limitations
 
 - 🔑 **Google API Dependency** — Currently requires a Google API key; other embedding providers are not yet supported.  
-- 🐢 **Slow Embedding on Large Documents** — Processing can be time-consuming for very large files.  
+- 🐢 **Slow  on Large Documents** — Processing can be time-consuming for very large files.  
 - 🧾 **Limited Error Handling & Logging** — Needs more robust error reporting and logging for production environments.  
 - 🖼️ **Figure Description Timing** — Figure descriptions are generated during document loading, so direct queries about figures may yield limited results.  
 - 📉 **Parsing Challenges** — Complex research papers may have figures or tables that the parser fails to extract or interpret correctly.  
 - 🤖 **Adaptive but Inconsistent Behavior** — The model may initially fail to answer some queries but improve when the same question is re-asked later in the conversation.
+- 🖥️ Live Demo Performance — The live demo may be slow due to limited resources on Render Free.
+
 
 
 ### 📄 License
