@@ -20,10 +20,28 @@ By combining **RAG techniques, Gemini embeddings, and FAISS semantic search**, t
 ---
 ---
 ### 💻 Application UI
-![Application UI](https://github.com/user-attachments/assets/8c85cc9b-5f8c-416e-a5ec-4cfadcba2134)
 
-
-
+<a href="https://github.com/user-attachments/assets/80200359-dee9-43ce-89db-598b4b4b4713">
+  <img src="https://github.com/user-attachments/assets/80200359-dee9-43ce-89db-598b4b4b4713" width="600" alt="Screenshot 266"/>
+</a>
+<a href="https://github.com/user-attachments/assets/2f9d447b-0b10-481a-ba56-bf0a032c15c9">
+  <img src="https://github.com/user-attachments/assets/2f9d447b-0b10-481a-ba56-bf0a032c15c9" width="600" alt="Screenshot 269"/>
+</a>
+<a href="https://github.com/user-attachments/assets/35a7413a-19a9-43c2-831f-0499b6a113a9">
+  <img src="https://github.com/user-attachments/assets/35a7413a-19a9-43c2-831f-0499b6a113a9" width="600" alt="Screenshot 270"/>
+</a>
+<a href="https://github.com/user-attachments/assets/91c108c9-6cbe-4bde-8970-2e0735b5b5de">
+  <img src="https://github.com/user-attachments/assets/91c108c9-6cbe-4bde-8970-2e0735b5b5de" width="600" alt="Screenshot 271"/>
+</a>
+<a href="https://github.com/user-attachments/assets/95070424-5494-40f8-8cb5-c56551e4a661">
+  <img src="https://github.com/user-attachments/assets/95070424-5494-40f8-8cb5-c56551e4a661" width="600" alt="Screenshot 272"/>
+</a>
+<a href="https://github.com/user-attachments/assets/3c5b4d1a-0718-4a3f-ba6f-f1f33b462771">
+  <img src="https://github.com/user-attachments/assets/3c5b4d1a-0718-4a3f-ba6f-f1f33b462771" width="600" alt="Screenshot 273"/>
+</a>
+<a href="https://github.com/user-attachments/assets/dd61bf10-5d61-4b6c-b55d-b038def0fe73">
+  <img src="https://github.com/user-attachments/assets/dd61bf10-5d61-4b6c-b55d-b038def0fe73" width="600" alt="Screenshot 274"/>
+</a>
 
 ---
 
