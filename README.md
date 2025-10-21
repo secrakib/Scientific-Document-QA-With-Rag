@@ -24,69 +24,9 @@ By combining **RAG techniques, Gemini embeddings, and FAISS semantic search**, t
 - 🧠 **Context-Aware Q/A** — Understands user queries in the context of prior conversation.  
 - 🔍 **Semantic Search with FAISS** — Retrieves the most relevant document chunks efficiently.  
 - 🔗 **RAG Pipeline (LangChain)** — Connects retrieval, document, and memory chains for precise, dynamic reasoning.  
-- 💬 **Interactive UI** — Built with Streamlit for seamless document upload and exploration.  
-- ✅ **Tested & Modular Design** — Comprehensive unit tests across all core modules.  
-
----
-
-## 🧩 Processing Pipeline
-
-```
-                          ┌───────────────────┐
-                          │   User / Frontend │
-                          │   (Streamlit UI) │
-                          └─────────┬────────┘
-                                    │ Upload PDF / Ask Query
-                                    ▼
-                          ┌───────────────────┐
-                          │     Backend       │
-                          │   (FastAPI API)   │
-                          └─────────┬────────┘
-                                    │
-          ┌─────────────────────────┼─────────────────────────┐
-          │                         │                         │
-          ▼                         ▼                         ▼
- ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
- │ PDF Upload      │       │ Query / Session │       │ Session Memory  │
- │ (uploads/)      │       │ Validation      │       │ (memory_chain)  │
- └─────────┬───────┘       └─────────┬───────┘       └─────────┬───────┘
-           │                         │                         │
-           ▼                         ▼                         ▼
- ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
- │ PDF Loader      │       │ Text Splitter    │       │ Retriever        │
- │ data_loader()   │──────▶│ text_splitter() │──────▶│ retriver()       │
- └─────────┬───────┘       └─────────┬───────┘       └─────────┬───────┘
-           │                         │                         │
-           ▼                         ▼                         ▼
- ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
- │ Metadata        │       │ Embeddings       │       │ FAISS Vector DB  │
- │ ingestion       │       │ gemini_embedding │──────▶│ vector_database │
- └─────────┬───────┘       └─────────┬───────┘       └─────────┬───────┘
-           │                         │                         │
-           └──────────────┬──────────┴─────────────┬───────────┘
-                          ▼                        ▼
-                  ┌──────────────────────────┐
-                  │ Document / Retrieval     │
-                  │ Chains (RAG Pipeline)    │
-                  │ document_chain(),        │
-                  │ retrival_chain(),        │
-                  │ memory_chain()           │
-                  └─────────┬────────────────┘
-                            │
-                            ▼
-                  ┌──────────────────────────┐
-                  │ LLM Response             │
-                  │ llm() generates answer   │
-                  └─────────┬────────────────┘
-                            │
-                            ▼
-                  ┌──────────────────────────┐
-                  │ Frontend / User UI       │
-                  │ Displays Answer          │
-                  └──────────────────────────┘
-
-```
-
+- 💬 **Interactive UI** — Built with Streamlit for seamless document upload and exploration.
+- 📊 Figure & Table Understanding — Can describe figures, extract and summarize tables, and answer queries related to tabular data for deeper document insights. 
+- ✅ **Tested & Modular Design** — Comprehensive unit tests across all core modules.
 
 ---
 
@@ -100,42 +40,45 @@ By combining **RAG techniques, Gemini embeddings, and FAISS semantic search**, t
 | **Backend API** | FastAPI |
 | **Frontend** | Streamlit |
 | **Deployment** | Render |
+| **Containerization** | Docker |
+| **Pdf Extraction** | PyMuPDF4LLM |
 
----
-
-## 🧠 How It Works
-
-1. **Upload a PDF** → The document is split into semantically meaningful chunks.  
-2. **Embedding Generation** → Each chunk is embedded using **Gemini embeddings**.  
-3. **FAISS Indexing** → Chunks are stored and retrieved efficiently via **FAISS**.  
-4. **RAG Processing** → A **LangChain pipeline** retrieves relevant chunks and generates responses.  
-5. **Conversational Memory** → User history is retained for context-aware answers.
 
 ---
 
 ## 🧑‍💻 Setup & Installation
 
-### Clone and Run the Project
+
+Follow these steps to set up and run the project locally:
+
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/secrakib/Scientific-Pdf-Rag.git
+cd Scientific-Pdf-Rag
 ```
-Clone the repo
+### 2. Create a Virtual Environment
+```
+# macOS / Linux
+python3 -m venv venv
+source venv/bin/activate
 
-git clone https://github.com/yourusername/context-aware-scientific-qa.git
-cd context-aware-scientific-qa
-
-Create a Virtual Environment
-
+# Windows
 python -m venv venv
-source venv/bin/activate     # On macOS/Linux
-venv\Scripts\activate        # On Windows
-
-Install Dependencies
+venv\Scripts\activate
+```
+### 3. Install Python Dependencies
+```
+pip install --upgrade pip
 pip install -r requirements.txt
-
-4. Run the Streamlit App
-streamlit run app.py
+```
+### 4. Install Docker (if not already installed)
+### 5. Build and Run Docker Containers
+```
+docker compose build
+docker compose up
 ```
 
-### 🔧 Environment Variables
+## 🔧 Environment Variables
 This project requires a .env file in the root directory to store environment-specific configuration values.
 Create a file named .env in the project root with the following content:
 ```
@@ -143,13 +86,13 @@ Create a file named .env in the project root with the following content:
 GOOGLE_API_KEY=your_google_api_key_here
 ```
 
-### 📚 Example Query
+## 📚 Example Query
 ```
 User: “What is the main contribution of this paper?”
-System: “The paper proposes a context-aware retrieval model for improved document-level question answering, leveraging multi-hop reasoning across sections.”
+System: “The paper proposes a novel Multimodal dataset for bengali hate speech.”
 ```
 
-### 🧱 Project Structure
+## 🧱 Project Structure
 ```
 ├─ .vscode/
 │
@@ -188,30 +131,15 @@ System: “The paper proposes a context-aware retrieval model for improved docum
 └─ requirements.txt
 
 ```
-### ⚠️ Known Issues / Limitations
-```
-The system currently requires a Google API key to function; other API providers are not yet supported.
+## ⚠️ Known Issues / Limitations
 
-The embedding process may be slow for very large documents.
+- 🔑 **Google API Dependency** — Currently requires a Google API key; other embedding providers are not yet supported.  
+- 🐢 **Slow Embedding on Large Documents** — Processing can be time-consuming for very large files.  
+- 🧾 **Limited Error Handling & Logging** — Needs more robust error reporting and logging for production environments.  
+- 🖼️ **Figure Description Timing** — Figure descriptions are generated during document loading, so direct queries about figures may yield limited results.  
+- 📉 **Parsing Challenges** — Complex research papers may have figures or tables that the parser fails to extract or interpret correctly.  
+- 🤖 **Adaptive but Inconsistent Behavior** — The model may initially fail to answer some queries but improve when the same question is re-asked later in the conversation.
 
-Frontend performance can degrade with large datasets.
-
-Docker setup assumes a Unix-like environment; Windows users may need additional configuration.
-
-Error handling and logging are minimal and should be improved for production use.
-
-```
-### 📈 Future Improvements
-```
-🔄 Support for multi-document context
-
-🗣️ Voice query integration
-
-🧩 Improved memory persistence with vectorized history
-
-🌍 Support for multilingual scientific texts
-```
-### 
 
 ### 📄 License
 ```
