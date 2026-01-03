@@ -12,8 +12,8 @@ from langchain_groq import ChatGroq
 
 def llm():
     llm = ChatGroq(
-        model="openai/gpt-oss-120b",
+        model="llama-3.3-70b-versatile",
         temperature=.5,
-        reasoning_effort="high"
+        #reasoning_effort="low"
     )
     return llm

@@ -72,9 +72,9 @@ async def upload_pdf(file: UploadFile = File(...)):
         with file_path.open("wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        
+        llm_model = llm()
         loaded_docs = data_loader(str(file_path),extract_images=True)
-        docs_with_metadata=metadata_ingested_docs(loaded_docs,'gemini-2.5-flash-lite')
+        docs_with_metadata=metadata_ingested_docs(loaded_docs,"openai/gpt-oss-120b",llm_model)
         splitted_docs = text_splitter(docs_with_metadata)
         
         

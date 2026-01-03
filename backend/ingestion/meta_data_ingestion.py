@@ -8,7 +8,6 @@ from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field
 from typing import List, Optional
 import json
-from backend.llm.llm import llm
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
@@ -21,9 +20,9 @@ class PaperMetadata(BaseModel):
     subject: str = Field(description="The abstract or subject/summary of the paper")
     keywords: str = Field(default="", description="Keywords or index terms (comma-separated)")
 
-llm = llm()
 
-def metadata_ingested_docs(document: List, model: str = "openai/gpt-oss-120b") -> List:
+
+def metadata_ingested_docs(document: List, model: str = "openai/gpt-oss-120b", llm=None) -> List:
     """
     Extract metadata from the first document and apply it to all documents.
     
