@@ -12,7 +12,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from llm.llm import llm
-from embeddings.embedding import gemini_embedding
+from embeddings.embedding import embedding
 from vector_database.vector_database import faiss_vector_database
 from splitting.text_splitter import text_splitter
 from ingestion.pdf_loader_V2 import data_loader
@@ -78,8 +78,8 @@ async def upload_pdf(file: UploadFile = File(...)):
         splitted_docs = text_splitter(docs_with_metadata)
         
         
-        embedding = gemini_embedding()
-        vector_database = faiss_vector_database(splitted_docs, embedding)
+        embedding_model = embedding()
+        vector_database = faiss_vector_database(splitted_docs, embedding_model)
         
         
         llm_model = llm()

@@ -4,7 +4,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 from backend.llm.llm import llm
-from backend.embeddings.embedding import gemini_embedding
+from backend.embeddings.embedding import embedding
 from backend.vector_database.vector_database import faiss_vector_database
 from backend.splitting.text_splitter import text_splitter
 from backend.ingestion.pdf_loader_V2 import data_loader
@@ -16,25 +16,26 @@ from backend.retriver.history_aware_retriver import history_retriver
 from langchain_community.chat_message_histories import ChatMessageHistory
 from backend.chains.memory_chain import memory_chain,get_session_history
 from langchain_core.documents import Document
+from backend.llm.llm import llm
 
+llm = llm()
 path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
 loaded_docs = data_loader(path='backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf',extract_images=False)
-metadata = metadata_ingested_docs(loaded_docs,"openai/gpt-oss-120b")
+metadata = metadata_ingested_docs(loaded_docs,"openai/gpt-oss-120b",llm)
 
 # Split documents
 splitted_docs = text_splitter(metadata)
 
 # Create vector database
-embedding = gemini_embedding()
+embedding = embedding()
 vector_database = faiss_vector_database(splitted_docs, embedding)
 
 # Setup LLM and retriever
-llm_model = llm()
 retriever_instance = retriver(vector_database)
-history_aware_retriever = history_retriver(llm_model, retriever_instance)
+history_aware_retriever = history_retriver(llm, retriever_instance)
 
 # Create chains
-doc_chain = document_chain(llm_model)
+doc_chain = document_chain(llm)
 retrieval_chain_instance = retrival_chain(history_aware_retriever, doc_chain)
 
 memory_chain= memory_chain(retrieval_chain_instance)

@@ -13,10 +13,9 @@ os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
 
 
 
-def gemini_embedding():
+def embedding():
     embeddings = GoogleGenerativeAIEmbeddings(
     model="models/gemini-embedding-001",
-    
     
     )
     return embeddings
