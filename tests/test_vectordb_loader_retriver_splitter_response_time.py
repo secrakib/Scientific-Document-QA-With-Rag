@@ -4,7 +4,7 @@ import sys,os,types
 from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
-from langchain.chains import create_history_aware_retriever
+from langchain_classic.chains import create_history_aware_retriever
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
 from backend.llm.llm import llm
