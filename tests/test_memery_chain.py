@@ -19,7 +19,7 @@ from langchain_core.documents import Document
 
 path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
 loaded_docs = data_loader(path='backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf',extract_images=False)
-metadata = metadata_ingested_docs(loaded_docs,"gemma-3-27b")
+metadata = metadata_ingested_docs(loaded_docs,"openai/gpt-oss-120b")
 
 # Split documents
 splitted_docs = text_splitter(metadata)

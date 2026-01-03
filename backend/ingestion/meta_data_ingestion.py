@@ -4,14 +4,15 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field
 from typing import List, Optional
 import json
-
+from backend.llm.llm import llm
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
-
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 class PaperMetadata(BaseModel):
     """Structured output model for research paper metadata."""
@@ -20,8 +21,9 @@ class PaperMetadata(BaseModel):
     subject: str = Field(description="The abstract or subject/summary of the paper")
     keywords: str = Field(default="", description="Keywords or index terms (comma-separated)")
 
+llm = llm()
 
-def metadata_ingested_docs(document: List, model: str = "gemini-2.5-pro") -> List:
+def metadata_ingested_docs(document: List, model: str = "openai/gpt-oss-120b") -> List:
     """
     Extract metadata from the first document and apply it to all documents.
     
@@ -52,13 +54,8 @@ def metadata_ingested_docs(document: List, model: str = "gemini-2.5-pro") -> Lis
     
     print(f" Missing fields detected: {missing_fields}")
     print(" Extracting metadata from first document...")
-    
-    
-    llm = ChatGoogleGenerativeAI(
-        model=model,
-        google_api_key=os.getenv("GOOGLE_API_KEY"),
-        temperature=0
-    )
+
+    #llm = llm()
     
     
     structured_llm = llm.with_structured_output(PaperMetadata)

@@ -7,7 +7,9 @@ sys.path.insert(0, str(project_root))
 
 
 from backend.ingestion.pdf_loader_V2 import data_loader
-x=data_loader(path='C:\Langchain\Scientific-Pdf-Rag\backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf',
-              extract_images=True)
+x = data_loader(
+    path=r'E:\Scientific-Document-QA-With-Rag\backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf',
+    extract_images=False
+)
 print(x)
 #hello
