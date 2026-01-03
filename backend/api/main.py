@@ -7,7 +7,7 @@ import uuid
 from typing import Optional
 import sys
 
-# Add project root to path
+
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
@@ -25,7 +25,7 @@ from chains.memory_chain import memory_chain, get_session_history
 
 app = FastAPI(title="RAG PDF Query API")
 
-# CORS middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -34,7 +34,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Storage for active sessions
+
 sessions = {}
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
@@ -58,40 +58,40 @@ async def root():
 
 @app.post("/upload", response_model=UploadResponse)
 async def upload_pdf(file: UploadFile = File(...)):
-    """Upload and process a PDF file"""
+    """Upload and process pdf file"""
     try:
-        # Validate file type
+        
         if not file.filename.endswith('.pdf'):
             raise HTTPException(status_code=400, detail="Only PDF files are allowed")
         
-        # Generate session ID
+        
         session_id = str(uuid.uuid4())
         
-        # Save uploaded file
+        
         file_path = UPLOAD_DIR / f"{session_id}_{file.filename}"
         with file_path.open("wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        # Process PDF
+        
         loaded_docs = data_loader(str(file_path),extract_images=True)
         docs_with_metadata=metadata_ingested_docs(loaded_docs,'gemini-2.5-flash-lite')
         splitted_docs = text_splitter(docs_with_metadata)
         
-        # Create vector database
+        
         embedding = gemini_embedding()
         vector_database = faiss_vector_database(splitted_docs, embedding)
         
-        # Setup LLM and retriever
+        
         llm_model = llm()
         retriever_instance = retriver(vector_database)
         history_aware_retriever = history_retriver(llm_model, retriever_instance)
         
-        # Create chains
+        
         doc_chain = document_chain(llm_model)
         retrieval_chain_instance = retrival_chain(history_aware_retriever, doc_chain)
         mem_chain = memory_chain(retrieval_chain_instance)
         
-        # Store session
+        
         sessions[session_id] = {
             "memory_chain": mem_chain,
             "filename": file.filename,
@@ -109,23 +109,23 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 @app.post("/query", response_model=QueryResponse)
 async def query_pdf(request: QueryRequest):
-    """Query the uploaded PDF"""
+    """Query the pdf"""
     try:
-        # Validate query
+        
         if not request.query or request.query.strip() == "":
             raise HTTPException(status_code=400, detail="Query cannot be empty. Please enter a valid question.")
         
         if len(request.query) > 1000:
             raise HTTPException(status_code=400, detail="Query is too long. Please limit to 1000 characters.")
         
-        # Check if session exists
+        
         if request.session_id not in sessions:
             raise HTTPException(status_code=404, detail="Session not found. Please upload a PDF first.")
         
-        # Get memory chain for this session
+        
         mem_chain = sessions[request.session_id]["memory_chain"]
         
-        # Query the chain
+        
         response = mem_chain.invoke(
             {"input": request.query},
             config={"configurable": {"session_id": request.session_id}}
@@ -164,12 +164,12 @@ async def delete_session(session_id: str):
     if session_id not in sessions:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    # Delete uploaded file
+    
     file_path = Path(sessions[session_id]["file_path"])
     if file_path.exists():
         file_path.unlink()
     
-    # Remove session
+    
     del sessions[session_id]
     
     return {"message": "Session deleted successfully"}
