@@ -12,11 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # Install Python dependencies
-# Install dependencies with compatibility resolution
-RUN pip install --no-cache-dir langchain==0.3.27 && \
-    pip install --no-cache-dir --no-deps langchain-core==1.2.6 && \
-    pip install --no-cache-dir -r requirements.txt --no-deps || true && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy entire backend directory structure
 COPY . .
