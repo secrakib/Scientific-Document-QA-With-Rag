@@ -1,4 +1,4 @@
-# 🔬 Context-Aware Scientific Document Q/A System  
+# 🔬 Context-Aware Scientific Document Q/A System  (Python 3.12.4)
 *A Retrieval-Augmented Generation (RAG) system for interactive scientific document exploration.*
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://paperchat-frontend.onrender.com/)

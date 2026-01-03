@@ -23,7 +23,7 @@ def data_loader(path: str, extract_images: bool = False):
         loader = PyMuPDF4LLMLoader(
             file_path=path,
             table_strategy="lines",
-            extract_images=True,
+            extract_images=False,
             images_parser=image_parser
         )
     else:

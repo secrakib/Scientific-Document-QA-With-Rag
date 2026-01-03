@@ -18,8 +18,8 @@ from backend.chains.memory_chain import memory_chain,get_session_history
 from langchain_core.documents import Document
 
 path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
-loaded_docs = data_loader(path='backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf')
-metadata = metadata_ingested_docs(loaded_docs,"gemini-2.5-flash-lite")
+loaded_docs = data_loader(path='backend/ingestion/Sentiment analysis in Bengali via transfer learning.pdf',extract_images=False)
+metadata = metadata_ingested_docs(loaded_docs,"gemma-3-27b")
 
 # Split documents
 splitted_docs = text_splitter(metadata)

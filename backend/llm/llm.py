@@ -6,11 +6,13 @@ sys.path.insert(0, str(project_root))
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 from  langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 
 def llm():
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-pro",
+    llm = ChatGroq(
+        model="llama-3.3-70b-versatile",
         temperature=.5
     )
     return llm

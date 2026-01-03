@@ -14,7 +14,7 @@ from backend.embeddings.embedding import gemini_embedding
 from backend.splitting.text_splitter import text_splitter
 from backend.ingestion.pdf_loader import data_loader
 
-# Load and process documents
+
 print("Loading documents...")
 start_time = time.time()
 loaded_docs = data_loader(r'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf')
@@ -30,7 +30,7 @@ llm = llm()
 retriever_obj = retriver(vector_database)
 
 def history_aware_retriever(llm, retriever):
-    # Use a simpler, faster prompt
+    
     history_prompt = ChatPromptTemplate.from_messages([
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}"),
@@ -39,7 +39,7 @@ def history_aware_retriever(llm, retriever):
 
     return create_history_aware_retriever(llm, retriever, history_prompt)
 
-# Create history-aware retriever
+
 history_aware_retriever_chain = history_aware_retriever(llm, retriever_obj)
 
 def diagnose_performance():
@@ -47,7 +47,7 @@ def diagnose_performance():
     print("PERFORMANCE DIAGNOSIS")
     print("="*50)
     
-    # Test 1: Direct vector search (bypass LLM)
+    
     print("\n1. Testing direct vector search (no LLM):")
     start_time = time.time()
     try:
@@ -58,7 +58,7 @@ def diagnose_performance():
     except Exception as e:
         print(f"Direct search failed: {e}")
     
-    # Test 2: History-aware search with timing
+    
     print("\n2. Testing history-aware retriever:")
     chat_history = []
     query = "What ML models are used?"
@@ -73,7 +73,7 @@ def diagnose_performance():
         print(f"History-aware search time: {total_time:.2f} seconds")
         print(f"Documents retrieved: {len(result)}")
         
-        # If direct search was successful, we can compare
+        
         if 'direct_time' in locals():
             llm_time = total_time - direct_time
             print(f"Estimated LLM processing time: {llm_time:.2f} seconds")
@@ -81,7 +81,7 @@ def diagnose_performance():
     except Exception as e:
         print(f"History-aware search failed: {e}")
 
-# Optimized test function
+
 def optimized_test():
     print("\n" + "="*50)
     print("OPTIMIZED TESTING")
@@ -124,7 +124,7 @@ def optimized_test():
         except Exception as e:
             print(f"Error: {e}")
 
-# Alternative: Use a simpler approach without history awareness for faster results
+
 def simple_retriever_test():
     """Test using just the basic retriever for comparison"""
     print("\n" + "="*50)

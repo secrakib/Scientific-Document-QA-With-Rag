@@ -9,7 +9,7 @@ import streamlit as st
 import requests
 import os
 
-# API Configuration
+
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 API_URL = API_URL.rstrip('/')
@@ -20,7 +20,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Initialize session state
+
 if "session_id" not in st.session_state:
     st.session_state.session_id = None
 if "filename" not in st.session_state:
@@ -28,11 +28,10 @@ if "filename" not in st.session_state:
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-# Title
+
 st.title("📄 PDF Q&A Assistant")
 st.markdown("Upload a PDF and ask questions about its content")
 
-# Sidebar for file upload
 with st.sidebar:
     st.header("Upload PDF")
     uploaded_file = st.file_uploader("Choose a PDF file", type=["pdf"])
@@ -57,7 +56,7 @@ with st.sidebar:
                 except Exception as e:
                     st.error(f"❌ Connection error: {str(e)}")
     
-    # Display current session info
+    
     if st.session_state.session_id:
         st.divider()
         st.success(f"**Active Session**")
@@ -73,14 +72,14 @@ with st.sidebar:
             st.session_state.chat_history = []
             st.rerun()
 
-# Main content area
+
 if st.session_state.session_id is None:
     st.info("👈 Please upload a PDF file from the sidebar to get started")
 else:
-    # Display chat history
+    
     st.markdown("### 💬 Conversation")
     
-    # Chat container
+    
     chat_container = st.container()
     
     with chat_container:
@@ -88,17 +87,17 @@ else:
             st.markdown("*No questions asked yet. Start by asking a question below.*")
         else:
             for i, qa in enumerate(st.session_state.chat_history):
-                # Question
+                
                 with st.chat_message("user"):
                     st.markdown(f"**Query:** {qa['query']}")
                 
-                # Answer
+                
                 with st.chat_message("assistant"):
                     st.markdown(f"**Answer:** {qa['answer']}")
     
     st.divider()
     
-    # Query input
+    
     with st.form(key="query_form", clear_on_submit=True):
         query = st.text_input(
             "Ask a question about your PDF:",
@@ -115,7 +114,7 @@ else:
             else:
                 with st.spinner("Generating answer..."):
                     try:
-                        # Send query to API
+                        
                         payload = {
                             "session_id": st.session_state.session_id,
                             "query": query
@@ -124,7 +123,7 @@ else:
                         
                         if response.status_code == 200:
                             data = response.json()
-                            # Add to chat history
+                            
                             st.session_state.chat_history.append({
                                 "query": query,
                                 "answer": data["answer"]
@@ -138,7 +137,7 @@ else:
                     except Exception as e:
                         st.error(f"❌ Sorry, I couldn't generate an answer. Please try again.")
 
-# Footer
+
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: gray;'>Powered by LangChain & FastAPI</div>",

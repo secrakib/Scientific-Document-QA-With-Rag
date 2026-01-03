@@ -15,7 +15,7 @@ from backend.retriver.history_aware_retriver import history_retriver
 from langchain_community.chat_message_histories import ChatMessageHistory
 
 path = 'backend\ingestion\Sentiment analysis in Bengali via transfer learning.pdf'
-loaded_docs = data_loader(path)
+loaded_docs = data_loader(path,extract_images=False)
 
 # Split documents
 splitted_docs = text_splitter(loaded_docs)

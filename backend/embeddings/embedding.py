@@ -7,17 +7,10 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ["MISTRALAI_API_KEY"] = os.getenv("MISTRALAI_API_KEY")
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+#os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
 
-from langchain_mistralai import MistralAIEmbeddings
-def mistral_embedding():
-    embeddings = MistralAIEmbeddings(
-        model="mistral-embed",
-        api_key=os.environ["MISTRALAI_API_KEY"]
-    )
-    return embeddings
 
 
 def gemini_embedding():
