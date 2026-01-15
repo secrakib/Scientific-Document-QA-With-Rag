@@ -14,6 +14,17 @@ API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 API_URL = API_URL.rstrip('/')
 
+# Health check for backend
+try:
+    health_response = requests.get(f"{API_URL}/health", timeout=5)
+    if health_response.status_code != 200:
+        st.error(f"⚠️ Backend is not responding properly. Please ensure it's running at: {API_URL}")
+        st.stop()
+except requests.exceptions.RequestException:
+    st.error(f"❌ Cannot connect to backend at: {API_URL}")
+    st.info(f"Please run the backend server at: https://paperchat-backend.onrender.com/")
+    st.stop()
+
 st.set_page_config(
     page_title="PDF Q&A Assistant",
     page_icon="📄",
