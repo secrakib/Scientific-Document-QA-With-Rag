@@ -56,6 +56,11 @@ class UploadResponse(BaseModel):
 async def root():
     return {"message": "RAG PDF Query API is running"}
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "message": "Backend is running"}
+
 @app.post("/upload", response_model=UploadResponse)
 async def upload_pdf(file: UploadFile = File(...)):
     """Upload and process pdf file"""
